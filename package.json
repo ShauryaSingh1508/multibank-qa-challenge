@@ -1,0 +1,42 @@
+{
+  "name": "multibank-qa-challenge",
+  "version": "1.0.0",
+  "description": "Playwright + TypeScript UI/API automation framework for the mb.io (MultiBank) public site - QA Automation coding challenge",
+  "scripts": {
+    "pretest": "playwright install chromium firefox webkit",
+    "test": "playwright test",
+    "test:smoke": "playwright test --grep @smoke --project=chromium",
+    "test:chromium": "playwright test --project=chromium",
+    "test:firefox": "playwright test --project=firefox",
+    "test:webkit": "playwright test --project=webkit",
+    "test:cross-browser": "playwright test --project=chromium --project=firefox --project=webkit",
+    "test:mobile": "playwright test --project=mobile-chrome --project=mobile-safari",
+    "test:api": "playwright test --project=api",
+    "test:visual": "playwright test --project=visual",
+    "test:visual:update": "playwright test --project=visual --update-snapshots",
+    "report": "playwright show-report reports/html",
+    "report:summary": "node scripts/summarize-results.mjs reports/results.json",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc --noEmit"
+  },
+  "author": "Shaurya Singh",
+  "license": "UNLICENSED",
+  "type": "commonjs",
+  "devDependencies": {
+    "@eslint/js": "^9.39.5",
+    "@playwright/test": "^1.64.1",
+    "@types/node": "^22.20.5",
+    "dotenv": "^18.0.8",
+    "eslint": "^9.39.5",
+    "eslint-plugin-playwright": "^2.12.1",
+    "prettier": "^3.9.10",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.71.2"
+  },
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  }
+}

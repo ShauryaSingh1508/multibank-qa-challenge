@@ -1,0 +1,11 @@
+node_modules/
+test-results/
+playwright-report/
+reports/html/
+reports/results.json
+reports/junit.xml
+blob-report/
+.env
+.DS_Store
+# The curated sample run is committed on purpose
+!reports/sample/
