@@ -1,0 +1,102 @@
+name: e2e
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      locale:
+        description: 'Site locale to test'
+        default: 'en-AE'
+  schedule:
+    # Nightly against production: catches content/data regressions nobody pushed.
+    - cron: '0 3 * * *'
+
+concurrency:
+  group: e2e-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  LOCALE: ${{ inputs.locale || 'en-AE' }}
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run lint
+      - run: npm run format:check
+
+  e2e:
+    needs: lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - project: chromium
+            browsers: chromium
+          - project: firefox
+            browsers: firefox
+          - project: webkit
+            browsers: webkit
+          - project: mobile-chrome
+            browsers: chromium
+          - project: mobile-safari
+            browsers: webkit
+          - project: api
+            browsers: ''
+    name: e2e (${{ matrix.project }})
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - name: Install browser
+        if: matrix.browsers != ''
+        run: npx playwright install --with-deps ${{ matrix.browsers }}
+      - name: Run tests
+        run: npx playwright test --project=${{ matrix.project }}
+      - name: Job summary
+        if: always()
+        run: node scripts/summarize-results.mjs reports/results.json >> "$GITHUB_STEP_SUMMARY"
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: report-${{ matrix.project }}
+          path: |
+            reports/html
+            reports/results.json
+            reports/junit.xml
+            test-results
+          retention-days: 14
+
+  # Visual baselines are committed from macOS; Linux font rendering differs, so the CI job runs
+  # in the official Playwright container and is informational until Linux baselines are added.
+  visual:
+    needs: lint
+    runs-on: ubuntu-latest
+    container: mcr.microsoft.com/playwright:v1.64.1-noble
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - run: npx playwright test --project=visual
+        env: { HOME: /root }
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: report-visual
+          path: |
+            reports/html
+            test-results
+          retention-days: 14
