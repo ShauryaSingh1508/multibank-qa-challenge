@@ -1,0 +1,409 @@
+<testsuites id="" name="" tests="118" failures="0" skipped="1" errors="0" time="43.777093">
+<testsuite name="content/app-links.spec.ts" timestamp="2026-10-17T10:05:00.208Z" hostname="chromium" tests="1" failures="0" skipped="0" time="1.81" errors="0">
+<testcase name="Content - app download link CTA › APP-00 home CTA uses the smart link and opens in a new tab @regression" classname="content/app-links.spec.ts" time="1.81">
+</testcase>
+</testsuite>
+<testsuite name="content/banners.spec.ts" timestamp="2026-10-17T10:05:00.208Z" hostname="chromium" tests="2" failures="0" skipped="0" time="3.642" errors="0">
+<testcase name="Content - marketing banners › BAN-01a home hero banner renders above the fold, below the header @regression" classname="content/banners.spec.ts" time="1.82">
+</testcase>
+<testcase name="Content - marketing banners › BAN-01b Explore promo banners render between the page title and the spot market @regression" classname="content/banners.spec.ts" time="1.822">
+</testcase>
+</testsuite>
+<testsuite name="content/why-multibank.spec.ts" timestamp="2026-10-17T10:05:00.208Z" hostname="chromium" tests="4" failures="0" skipped="0" time="7.865" errors="0">
+<testcase name="Content - About Us &gt; Why MultiBank › WHY-01a is reached from the Company navigation item @smoke" classname="content/why-multibank.spec.ts" time="1.815">
+</testcase>
+<testcase name="Content - About Us &gt; Why MultiBank › page content › WHY-01b hero shows the heading, intro and key stats @smoke" classname="content/why-multibank.spec.ts" time="1.694">
+</testcase>
+<testcase name="Content - About Us &gt; Why MultiBank › page content › WHY-01c value sections have the correct headings and body text @regression" classname="content/why-multibank.spec.ts" time="1.755">
+</testcase>
+<testcase name="Content - About Us &gt; Why MultiBank › page content › WHY-01d strength cards and community section render @regression" classname="content/why-multibank.spec.ts" time="2.601">
+</testcase>
+</testsuite>
+<testsuite name="navigation/nav.spec.ts" timestamp="2026-10-17T10:05:00.208Z" hostname="chromium" tests="19" failures="0" skipped="0" time="28.076" errors="0">
+<testcase name="Navigation &amp; layout › NAV-01 top navigation renders every expected item @smoke" classname="navigation/nav.spec.ts" time="1.795">
+</testcase>
+<testcase name="Navigation &amp; layout › NAV-02 each navigation item opens the correct destination @smoke › Explore -&gt; /explore" classname="navigation/nav.spec.ts" time="1.749">
+</testcase>
+<testcase name="Navigation &amp; layout › NAV-02 each navigation item opens the correct destination @smoke › Features -&gt; /features" classname="navigation/nav.spec.ts" time="1.535">
+</testcase>
+<testcase name="Navigation &amp; layout › NAV-02 each navigation item opens the correct destination @smoke › OTC Desk -&gt; /features/otc-desk" classname="navigation/nav.spec.ts" time="1.591">
+</testcase>
+<testcase name="Navigation &amp; layout › NAV-02 each navigation item opens the correct destination @smoke › Company -&gt; /company" classname="navigation/nav.spec.ts" time="1.217">
+</testcase>
+<testcase name="Navigation &amp; layout › NAV-02 each navigation item opens the correct destination @smoke › Support -&gt; /support" classname="navigation/nav.spec.ts" time="1.568">
+</testcase>
+<testcase name="Navigation &amp; layout › NAV-02 each navigation item opens the correct destination @smoke › Blog -&gt; /blog" classname="navigation/nav.spec.ts" time="1.233">
+</testcase>
+<testcase name="Navigation &amp; layout › NAV-02 each navigation item opens the correct destination @smoke › $MBG opens the token site in a new tab" classname="navigation/nav.spec.ts" time="1.768">
+</testcase>
+<testcase name="Navigation &amp; layout › NAV-02 each navigation item opens the correct destination @smoke › Sign in points to the trading app" classname="navigation/nav.spec.ts" time="1.353">
+</testcase>
+<testcase name="Navigation &amp; layout › NAV-02 each navigation item opens the correct destination @smoke › Sign up points to the trading app" classname="navigation/nav.spec.ts" time="1.042">
+</testcase>
+<testcase name="Navigation &amp; layout › NAV-02 each navigation item opens the correct destination @smoke › logo returns to the home page" classname="navigation/nav.spec.ts" time="2.169">
+</testcase>
+<testcase name="Navigation &amp; layout › NAV-03 navigation at standard desktop viewports @regression › Full HD 1920x1080 › full nav is shown, no hamburger, no sideways scroll" classname="navigation/nav.spec.ts" time="1.708">
+</testcase>
+<testcase name="Navigation &amp; layout › NAV-03 navigation at standard desktop viewports @regression › Full HD 1920x1080 › header stays pinned to the top while scrolling" classname="navigation/nav.spec.ts" time="1.246">
+</testcase>
+<testcase name="Navigation &amp; layout › NAV-03 navigation at standard desktop viewports @regression › MacBook 1440x900 › full nav is shown, no hamburger, no sideways scroll" classname="navigation/nav.spec.ts" time="1.457">
+</testcase>
+<testcase name="Navigation &amp; layout › NAV-03 navigation at standard desktop viewports @regression › MacBook 1440x900 › header stays pinned to the top while scrolling" classname="navigation/nav.spec.ts" time="1.355">
+</testcase>
+<testcase name="Navigation &amp; layout › NAV-03 navigation at standard desktop viewports @regression › HD laptop 1366x768 › full nav is shown, no hamburger, no sideways scroll" classname="navigation/nav.spec.ts" time="1.363">
+</testcase>
+<testcase name="Navigation &amp; layout › NAV-03 navigation at standard desktop viewports @regression › HD laptop 1366x768 › header stays pinned to the top while scrolling" classname="navigation/nav.spec.ts" time="1.319">
+</testcase>
+<testcase name="Navigation &amp; layout › NAV-03 navigation at standard desktop viewports @regression › Small laptop 1280x800 › full nav is shown, no hamburger, no sideways scroll" classname="navigation/nav.spec.ts" time="1.253">
+</testcase>
+<testcase name="Navigation &amp; layout › NAV-03 navigation at standard desktop viewports @regression › Small laptop 1280x800 › header stays pinned to the top while scrolling" classname="navigation/nav.spec.ts" time="1.355">
+</testcase>
+</testsuite>
+<testsuite name="negative/broken-links.spec.ts" timestamp="2026-10-17T10:05:00.208Z" hostname="chromium" tests="1" failures="0" skipped="0" time="3.049" errors="0">
+<testcase name="Negative - broken link detection › NEG-02 header and footer links all resolve @regression" classname="negative/broken-links.spec.ts" time="3.049">
+</testcase>
+</testsuite>
+<testsuite name="negative/invalid-route.spec.ts" timestamp="2026-10-17T10:05:00.208Z" hostname="chromium" tests="5" failures="0" skipped="0" time="15.45" errors="0">
+<testcase name="Negative - invalid route handling › NEG-01 unknown top-level page returns 404 with a way back home @regression" classname="negative/invalid-route.spec.ts" time="0.77">
+</testcase>
+<testcase name="Negative - invalid route handling › NEG-01 unknown nested page returns 404 with a way back home @regression" classname="negative/invalid-route.spec.ts" time="0.59">
+</testcase>
+<testcase name="Negative - invalid route handling › NEG-01 unknown coin symbol returns 404 with a way back home @regression" classname="negative/invalid-route.spec.ts" time="1.158">
+</testcase>
+<testcase name="Negative - invalid route handling › NEG-01b &quot;Back to Homepage&quot; returns to the home page @regression" classname="negative/invalid-route.spec.ts" time="1.764">
+</testcase>
+<testcase name="Negative - invalid route handling › NEG-01c 404 page has a document title @regression @known-issue" classname="negative/invalid-route.spec.ts" time="11.168">
+<properties>
+<property name="known-issue" value="OBS-07: 404 page renders with an empty &lt;title&gt; (see docs/test-cases.md)">
+</property>
+<property name="fail" value="">
+</property>
+</properties>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/negative-invalid-route-Neg-3aa60-itle-regression-known-issue-chromium/error-context.md]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="negative/timeout.spec.ts" timestamp="2026-10-17T10:05:00.208Z" hostname="chromium" tests="5" failures="0" skipped="0" time="41.342" errors="0">
+<testcase name="Negative - content loading failure handling › NEG-04a slow market data still renders the table once it arrives @regression" classname="negative/timeout.spec.ts" time="6.29">
+</testcase>
+<testcase name="Negative - content loading failure handling › NEG-04b market data aborted: page survives without crashing @regression" classname="negative/timeout.spec.ts" time="8.83">
+<properties>
+<property name="observation" value="OBS-09: widget aborted: price table removed with no error/empty state; 4 silent retries in 8s">
+</property>
+</properties>
+</testcase>
+<testcase name="Negative - content loading failure handling › NEG-04b market data malformed JSON: page survives without crashing @regression" classname="negative/timeout.spec.ts" time="9.197">
+<properties>
+<property name="observation" value="OBS-09: widget malformed JSON: price table removed with no error/empty state; 4 silent retries in 8s">
+</property>
+</properties>
+</testcase>
+<testcase name="Negative - content loading failure handling › NEG-04b market data HTTP 500: page survives without crashing @regression @known-issue" classname="negative/timeout.spec.ts" time="15.939">
+<properties>
+<property name="known-issue" value="OBS-10: a 500 from market/widget replaces the whole Explore page with an error screen (see docs/test-cases.md)">
+</property>
+<property name="fail" value="">
+</property>
+</properties>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/negative-timeout-Negative--e04fa-hing-regression-known-issue-chromium/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Negative - content loading failure handling › NEG-04c prices feed failure does not show NaN or zero prices @regression" classname="negative/timeout.spec.ts" time="1.086">
+</testcase>
+</testsuite>
+<testsuite name="trading/spot-trading.spec.ts" timestamp="2026-10-17T10:05:00.208Z" hostname="chromium" tests="7" failures="0" skipped="0" time="13.727" errors="0">
+<testcase name="Trading - spot market › SPT-01 spot market section renders and lists trading pairs @smoke" classname="trading/spot-trading.spec.ts" time="1.083">
+</testcase>
+<testcase name="Trading - spot market › SPT-02 trading pairs are grouped into Hot, Gainers and Losers @regression" classname="trading/spot-trading.spec.ts" time="2.225">
+</testcase>
+<testcase name="Trading - spot market › SPT-03 every trading pair row contains the expected data fields @regression" classname="trading/spot-trading.spec.ts" time="2.708">
+</testcase>
+<testcase name="Trading - spot market › SPT-03b displayed prices agree with the market data feed @regression" classname="trading/spot-trading.spec.ts" time="2.259">
+</testcase>
+<testcase name="Trading - spot market › SPT-04 Gainers and Losers are ranked by 24h change @regression @known-issue" classname="trading/spot-trading.spec.ts" time="2.034">
+<properties>
+<property name="observation" value="OBS-06: Gainers/Losers are not strictly sorted by the displayed 24h change">
+</property>
+</properties>
+</testcase>
+<testcase name="Trading - spot market › SPT-05 a pair row opens its coin detail page @regression" classname="trading/spot-trading.spec.ts" time="2.316">
+</testcase>
+<testcase name="Trading - coin detail page health › SPT-06 coin detail page responds with HTTP 200 @regression @known-issue" classname="trading/spot-trading.spec.ts" time="1.102">
+<properties>
+<property name="known-issue" value="OBS-02: coin pages render but respond with HTTP 500 (see docs/test-cases.md)">
+</property>
+<property name="fail" value="">
+</property>
+</properties>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/trading-spot-trading-Tradi-ff03f--200-regression-known-issue-chromium/error-context.md]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="content/app-links.spec.ts" timestamp="2026-10-17T10:05:00.208Z" hostname="webkit" tests="1" failures="0" skipped="0" time="1.531" errors="0">
+<testcase name="Content - app download link CTA › APP-00 home CTA uses the smart link and opens in a new tab @regression" classname="content/app-links.spec.ts" time="1.531">
+</testcase>
+</testsuite>
+<testsuite name="content/banners.spec.ts" timestamp="2026-10-17T10:05:00.208Z" hostname="webkit" tests="2" failures="0" skipped="0" time="3.39" errors="0">
+<testcase name="Content - marketing banners › BAN-01a home hero banner renders above the fold, below the header @regression" classname="content/banners.spec.ts" time="1.392">
+</testcase>
+<testcase name="Content - marketing banners › BAN-01b Explore promo banners render between the page title and the spot market @regression" classname="content/banners.spec.ts" time="1.998">
+</testcase>
+</testsuite>
+<testsuite name="content/why-multibank.spec.ts" timestamp="2026-10-17T10:05:00.208Z" hostname="webkit" tests="4" failures="0" skipped="0" time="10.009" errors="0">
+<testcase name="Content - About Us &gt; Why MultiBank › WHY-01a is reached from the Company navigation item @smoke" classname="content/why-multibank.spec.ts" time="2.324">
+</testcase>
+<testcase name="Content - About Us &gt; Why MultiBank › page content › WHY-01b hero shows the heading, intro and key stats @smoke" classname="content/why-multibank.spec.ts" time="2.132">
+</testcase>
+<testcase name="Content - About Us &gt; Why MultiBank › page content › WHY-01c value sections have the correct headings and body text @regression" classname="content/why-multibank.spec.ts" time="2.421">
+</testcase>
+<testcase name="Content - About Us &gt; Why MultiBank › page content › WHY-01d strength cards and community section render @regression" classname="content/why-multibank.spec.ts" time="3.132">
+</testcase>
+</testsuite>
+<testsuite name="navigation/nav.spec.ts" timestamp="2026-10-17T10:05:00.208Z" hostname="webkit" tests="19" failures="0" skipped="0" time="38.166" errors="0">
+<testcase name="Navigation &amp; layout › NAV-01 top navigation renders every expected item @smoke" classname="navigation/nav.spec.ts" time="1.553">
+</testcase>
+<testcase name="Navigation &amp; layout › NAV-02 each navigation item opens the correct destination @smoke › Explore -&gt; /explore" classname="navigation/nav.spec.ts" time="1.458">
+</testcase>
+<testcase name="Navigation &amp; layout › NAV-02 each navigation item opens the correct destination @smoke › Features -&gt; /features" classname="navigation/nav.spec.ts" time="1.333">
+</testcase>
+<testcase name="Navigation &amp; layout › NAV-02 each navigation item opens the correct destination @smoke › OTC Desk -&gt; /features/otc-desk" classname="navigation/nav.spec.ts" time="1.384">
+</testcase>
+<testcase name="Navigation &amp; layout › NAV-02 each navigation item opens the correct destination @smoke › Company -&gt; /company" classname="navigation/nav.spec.ts" time="1.181">
+</testcase>
+<testcase name="Navigation &amp; layout › NAV-02 each navigation item opens the correct destination @smoke › Support -&gt; /support" classname="navigation/nav.spec.ts" time="2.19">
+</testcase>
+<testcase name="Navigation &amp; layout › NAV-02 each navigation item opens the correct destination @smoke › Blog -&gt; /blog" classname="navigation/nav.spec.ts" time="1.294">
+</testcase>
+<testcase name="Navigation &amp; layout › NAV-02 each navigation item opens the correct destination @smoke › $MBG opens the token site in a new tab" classname="navigation/nav.spec.ts" time="6.997">
+</testcase>
+<testcase name="Navigation &amp; layout › NAV-02 each navigation item opens the correct destination @smoke › Sign in points to the trading app" classname="navigation/nav.spec.ts" time="1.268">
+</testcase>
+<testcase name="Navigation &amp; layout › NAV-02 each navigation item opens the correct destination @smoke › Sign up points to the trading app" classname="navigation/nav.spec.ts" time="1.648">
+</testcase>
+<testcase name="Navigation &amp; layout › NAV-02 each navigation item opens the correct destination @smoke › logo returns to the home page" classname="navigation/nav.spec.ts" time="3.001">
+</testcase>
+<testcase name="Navigation &amp; layout › NAV-03 navigation at standard desktop viewports @regression › Full HD 1920x1080 › full nav is shown, no hamburger, no sideways scroll" classname="navigation/nav.spec.ts" time="1.983">
+</testcase>
+<testcase name="Navigation &amp; layout › NAV-03 navigation at standard desktop viewports @regression › Full HD 1920x1080 › header stays pinned to the top while scrolling" classname="navigation/nav.spec.ts" time="2.523">
+</testcase>
+<testcase name="Navigation &amp; layout › NAV-03 navigation at standard desktop viewports @regression › MacBook 1440x900 › full nav is shown, no hamburger, no sideways scroll" classname="navigation/nav.spec.ts" time="1.841">
+</testcase>
+<testcase name="Navigation &amp; layout › NAV-03 navigation at standard desktop viewports @regression › MacBook 1440x900 › header stays pinned to the top while scrolling" classname="navigation/nav.spec.ts" time="2.015">
+</testcase>
+<testcase name="Navigation &amp; layout › NAV-03 navigation at standard desktop viewports @regression › HD laptop 1366x768 › full nav is shown, no hamburger, no sideways scroll" classname="navigation/nav.spec.ts" time="1.803">
+</testcase>
+<testcase name="Navigation &amp; layout › NAV-03 navigation at standard desktop viewports @regression › HD laptop 1366x768 › header stays pinned to the top while scrolling" classname="navigation/nav.spec.ts" time="1.48">
+</testcase>
+<testcase name="Navigation &amp; layout › NAV-03 navigation at standard desktop viewports @regression › Small laptop 1280x800 › full nav is shown, no hamburger, no sideways scroll" classname="navigation/nav.spec.ts" time="1.575">
+</testcase>
+<testcase name="Navigation &amp; layout › NAV-03 navigation at standard desktop viewports @regression › Small laptop 1280x800 › header stays pinned to the top while scrolling" classname="navigation/nav.spec.ts" time="1.639">
+</testcase>
+</testsuite>
+<testsuite name="negative/broken-links.spec.ts" timestamp="2026-10-17T10:05:00.208Z" hostname="webkit" tests="1" failures="0" skipped="1" time="0.249" errors="0">
+<testcase name="Negative - broken link detection › NEG-02 header and footer links all resolve @regression" classname="negative/broken-links.spec.ts">
+<properties>
+<property name="skip" value="link health is browser-independent">
+</property>
+</properties>
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="negative/invalid-route.spec.ts" timestamp="2026-10-17T10:05:00.208Z" hostname="webkit" tests="5" failures="0" skipped="0" time="15.833" errors="0">
+<testcase name="Negative - invalid route handling › NEG-01 unknown top-level page returns 404 with a way back home @regression" classname="negative/invalid-route.spec.ts" time="1.047">
+</testcase>
+<testcase name="Negative - invalid route handling › NEG-01 unknown nested page returns 404 with a way back home @regression" classname="negative/invalid-route.spec.ts" time="0.706">
+</testcase>
+<testcase name="Negative - invalid route handling › NEG-01 unknown coin symbol returns 404 with a way back home @regression" classname="negative/invalid-route.spec.ts" time="1.165">
+</testcase>
+<testcase name="Negative - invalid route handling › NEG-01b &quot;Back to Homepage&quot; returns to the home page @regression" classname="negative/invalid-route.spec.ts" time="1.953">
+</testcase>
+<testcase name="Negative - invalid route handling › NEG-01c 404 page has a document title @regression @known-issue" classname="negative/invalid-route.spec.ts" time="10.962">
+<properties>
+<property name="known-issue" value="OBS-07: 404 page renders with an empty &lt;title&gt; (see docs/test-cases.md)">
+</property>
+<property name="fail" value="">
+</property>
+</properties>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/negative-invalid-route-Neg-3aa60-itle-regression-known-issue-webkit/error-context.md]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="negative/timeout.spec.ts" timestamp="2026-10-17T10:05:00.208Z" hostname="webkit" tests="5" failures="0" skipped="0" time="42.536" errors="0">
+<testcase name="Negative - content loading failure handling › NEG-04a slow market data still renders the table once it arrives @regression" classname="negative/timeout.spec.ts" time="6.235">
+</testcase>
+<testcase name="Negative - content loading failure handling › NEG-04b market data aborted: page survives without crashing @regression" classname="negative/timeout.spec.ts" time="9.206">
+</testcase>
+<testcase name="Negative - content loading failure handling › NEG-04b market data malformed JSON: page survives without crashing @regression" classname="negative/timeout.spec.ts" time="9.299">
+</testcase>
+<testcase name="Negative - content loading failure handling › NEG-04b market data HTTP 500: page survives without crashing @regression @known-issue" classname="negative/timeout.spec.ts" time="16.342">
+<properties>
+<property name="known-issue" value="OBS-10: a 500 from market/widget replaces the whole Explore page with an error screen (see docs/test-cases.md)">
+</property>
+<property name="fail" value="">
+</property>
+</properties>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/negative-timeout-Negative--e04fa-hing-regression-known-issue-webkit/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Negative - content loading failure handling › NEG-04c prices feed failure does not show NaN or zero prices @regression" classname="negative/timeout.spec.ts" time="1.454">
+</testcase>
+</testsuite>
+<testsuite name="trading/spot-trading.spec.ts" timestamp="2026-10-17T10:05:00.208Z" hostname="webkit" tests="7" failures="0" skipped="0" time="15.919" errors="0">
+<testcase name="Trading - spot market › SPT-01 spot market section renders and lists trading pairs @smoke" classname="trading/spot-trading.spec.ts" time="1.879">
+</testcase>
+<testcase name="Trading - spot market › SPT-02 trading pairs are grouped into Hot, Gainers and Losers @regression" classname="trading/spot-trading.spec.ts" time="2.435">
+</testcase>
+<testcase name="Trading - spot market › SPT-03 every trading pair row contains the expected data fields @regression" classname="trading/spot-trading.spec.ts" time="2.737">
+</testcase>
+<testcase name="Trading - spot market › SPT-03b displayed prices agree with the market data feed @regression" classname="trading/spot-trading.spec.ts" time="2.577">
+</testcase>
+<testcase name="Trading - spot market › SPT-04 Gainers and Losers are ranked by 24h change @regression @known-issue" classname="trading/spot-trading.spec.ts" time="2.073">
+<properties>
+<property name="observation" value="OBS-06: Gainers/Losers are not strictly sorted by the displayed 24h change">
+</property>
+</properties>
+</testcase>
+<testcase name="Trading - spot market › SPT-05 a pair row opens its coin detail page @regression" classname="trading/spot-trading.spec.ts" time="2.839">
+</testcase>
+<testcase name="Trading - coin detail page health › SPT-06 coin detail page responds with HTTP 200 @regression @known-issue" classname="trading/spot-trading.spec.ts" time="1.379">
+<properties>
+<property name="known-issue" value="OBS-02: coin pages render but respond with HTTP 500 (see docs/test-cases.md)">
+</property>
+<property name="fail" value="">
+</property>
+</properties>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/trading-spot-trading-Tradi-ff03f--200-regression-known-issue-webkit/error-context.md]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="negative/mobile-viewport.spec.ts" timestamp="2026-10-17T10:05:00.208Z" hostname="mobile-chrome" tests="8" failures="0" skipped="0" time="17.433" errors="0">
+<testcase name="Negative - mobile breakpoint regression @mobile › iPhone SE 375px › NEG-03a desktop nav collapses into a working hamburger menu" classname="negative/mobile-viewport.spec.ts" time="2.897">
+</testcase>
+<testcase name="Negative - mobile breakpoint regression @mobile › iPhone SE 375px › NEG-03b mobile menu navigates to a page" classname="negative/mobile-viewport.spec.ts" time="2.416">
+</testcase>
+<testcase name="Negative - mobile breakpoint regression @mobile › iPhone SE 375px › NEG-03c key pages have no horizontal overflow" classname="negative/mobile-viewport.spec.ts" time="1.702">
+</testcase>
+<testcase name="Negative - mobile breakpoint regression @mobile › iPhone SE 375px › NEG-03d spot market stays usable" classname="negative/mobile-viewport.spec.ts" time="2.039">
+</testcase>
+<testcase name="Negative - mobile breakpoint regression @mobile › Pixel 7 412px › NEG-03a desktop nav collapses into a working hamburger menu" classname="negative/mobile-viewport.spec.ts" time="2.662">
+</testcase>
+<testcase name="Negative - mobile breakpoint regression @mobile › Pixel 7 412px › NEG-03b mobile menu navigates to a page" classname="negative/mobile-viewport.spec.ts" time="2.095">
+</testcase>
+<testcase name="Negative - mobile breakpoint regression @mobile › Pixel 7 412px › NEG-03c key pages have no horizontal overflow" classname="negative/mobile-viewport.spec.ts" time="1.634">
+</testcase>
+<testcase name="Negative - mobile breakpoint regression @mobile › Pixel 7 412px › NEG-03d spot market stays usable" classname="negative/mobile-viewport.spec.ts" time="1.988">
+</testcase>
+</testsuite>
+<testsuite name="trading/spot-trading.spec.ts" timestamp="2026-10-17T10:05:00.208Z" hostname="mobile-chrome" tests="1" failures="0" skipped="0" time="10.815" errors="0">
+<testcase name="Trading - coin detail page health › SPT-07 coin detail page has no untranslated i18n keys @mobile @known-issue" classname="trading/spot-trading.spec.ts" time="10.815">
+<properties>
+<property name="known-issue" value="OBS-08: raw key &quot;common:sign-up-login&quot; rendered as a button label (see docs/test-cases.md)">
+</property>
+<property name="fail" value="">
+</property>
+</properties>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/trading-spot-trading-Tradi-48012-18n-keys-mobile-known-issue-mobile-chrome/error-context.md]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="negative/mobile-viewport.spec.ts" timestamp="2026-10-17T10:05:00.208Z" hostname="mobile-safari" tests="8" failures="0" skipped="0" time="20.172" errors="0">
+<testcase name="Negative - mobile breakpoint regression @mobile › iPhone SE 375px › NEG-03a desktop nav collapses into a working hamburger menu" classname="negative/mobile-viewport.spec.ts" time="3.131">
+</testcase>
+<testcase name="Negative - mobile breakpoint regression @mobile › iPhone SE 375px › NEG-03b mobile menu navigates to a page" classname="negative/mobile-viewport.spec.ts" time="2.555">
+</testcase>
+<testcase name="Negative - mobile breakpoint regression @mobile › iPhone SE 375px › NEG-03c key pages have no horizontal overflow" classname="negative/mobile-viewport.spec.ts" time="2.324">
+</testcase>
+<testcase name="Negative - mobile breakpoint regression @mobile › iPhone SE 375px › NEG-03d spot market stays usable" classname="negative/mobile-viewport.spec.ts" time="2.514">
+</testcase>
+<testcase name="Negative - mobile breakpoint regression @mobile › Pixel 7 412px › NEG-03a desktop nav collapses into a working hamburger menu" classname="negative/mobile-viewport.spec.ts" time="2.385">
+</testcase>
+<testcase name="Negative - mobile breakpoint regression @mobile › Pixel 7 412px › NEG-03b mobile menu navigates to a page" classname="negative/mobile-viewport.spec.ts" time="2.752">
+</testcase>
+<testcase name="Negative - mobile breakpoint regression @mobile › Pixel 7 412px › NEG-03c key pages have no horizontal overflow" classname="negative/mobile-viewport.spec.ts" time="2.269">
+</testcase>
+<testcase name="Negative - mobile breakpoint regression @mobile › Pixel 7 412px › NEG-03d spot market stays usable" classname="negative/mobile-viewport.spec.ts" time="2.242">
+</testcase>
+</testsuite>
+<testsuite name="trading/spot-trading.spec.ts" timestamp="2026-10-17T10:05:00.208Z" hostname="mobile-safari" tests="1" failures="0" skipped="0" time="11.109" errors="0">
+<testcase name="Trading - coin detail page health › SPT-07 coin detail page has no untranslated i18n keys @mobile @known-issue" classname="trading/spot-trading.spec.ts" time="11.109">
+<properties>
+<property name="known-issue" value="OBS-08: raw key &quot;common:sign-up-login&quot; rendered as a button label (see docs/test-cases.md)">
+</property>
+<property name="fail" value="">
+</property>
+</properties>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/trading-spot-trading-Tradi-48012-18n-keys-mobile-known-issue-mobile-safari/error-context.md]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="api/market-data.spec.ts" timestamp="2026-10-17T10:05:00.208Z" hostname="api" tests="4" failures="0" skipped="0" time="1.387" errors="0">
+<testcase name="API - market data @api › API-01a widget returns the Hot / Gainers / Losers categories" classname="api/market-data.spec.ts" time="0.308">
+</testcase>
+<testcase name="API - market data @api › API-01b every widget symbol is a known, tradeable instrument" classname="api/market-data.spec.ts" time="0.318">
+</testcase>
+<testcase name="API - market data @api › API-02 prices are positive and fresh for every widget pair" classname="api/market-data.spec.ts" time="0.394">
+<properties>
+<property name="observation" value="OBS-11: prices older than 5 min: MBG (41 min), TRX (8 min)">
+</property>
+</properties>
+</testcase>
+<testcase name="API - market data @api › API-03 marketing banners point at loadable images" classname="api/market-data.spec.ts" time="0.367">
+</testcase>
+</testsuite>
+<testsuite name="content/app-links.spec.ts" timestamp="2026-10-17T10:05:00.208Z" hostname="api" tests="4" failures="0" skipped="0" time="5.754" errors="0">
+<testcase name="Content - app download link targets @api › APP-01 iPhone visitors are sent to the App Store listing @regression" classname="content/app-links.spec.ts" time="1.005">
+</testcase>
+<testcase name="Content - app download link targets @api › APP-02 Android visitors are sent to the Google Play listing @regression" classname="content/app-links.spec.ts" time="0.994">
+</testcase>
+<testcase name="Content - app download link targets @api › APP-03a desktop Chrome visitors land on a working store page @regression" classname="content/app-links.spec.ts" time="1.444">
+</testcase>
+<testcase name="Content - app download link targets @api › APP-03b desktop Safari visitors land on a working store page @regression @known-issue" classname="content/app-links.spec.ts" time="2.311">
+<properties>
+<property name="known-issue" value="OBS-05: desktop Safari is sent to the storefront-less App Store URL, which returns 404 (see docs/test-cases.md)">
+</property>
+<property name="fail" value="">
+</property>
+</properties>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/content-app-links-Content--691ac-page-regression-known-issue-api/error-context.md]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="visual/visual.spec.ts" timestamp="2026-10-17T10:05:00.208Z" hostname="visual" tests="4" failures="0" skipped="0" time="4.558" errors="0">
+<testcase name="Visual regression @visual › VIS-01a header" classname="visual/visual.spec.ts" time="0.811">
+</testcase>
+<testcase name="Visual regression @visual › VIS-01b footer" classname="visual/visual.spec.ts" time="1.252">
+</testcase>
+<testcase name="Visual regression @visual › VIS-01c Why MultiBank hero" classname="visual/visual.spec.ts" time="1.496">
+</testcase>
+<testcase name="Visual regression @visual › VIS-01d 404 page" classname="visual/visual.spec.ts" time="0.999">
+</testcase>
+</testsuite>
+</testsuites>
