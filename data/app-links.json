@@ -1,0 +1,14 @@
+{
+  "ctaLabel": "Download the app",
+  "appStore": {
+    "host": "apps.apple.com",
+    "appId": "id1592119946",
+    "listingUrl": "https://apps.apple.com/ae/app/id1592119946"
+  },
+  "googlePlay": {
+    "host": "play.google.com",
+    "packageId": "com.multibank.app",
+    "listingUrl": "https://play.google.com/store/apps/details?id=com.multibank.app"
+  },
+  "listingTitle": "mb.io"
+}

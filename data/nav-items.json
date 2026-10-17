@@ -1,0 +1,36 @@
+{
+  "mainNav": [
+    {
+      "label": "Explore",
+      "path": "/explore",
+      "title": "Explore Crypto Markets",
+      "heading": "Markets at your fingertips"
+    },
+    {
+      "label": "Features",
+      "path": "/features",
+      "title": "Crypto Trading Features",
+      "heading": "The power of crypto is yours"
+    },
+    {
+      "label": "OTC Desk",
+      "path": "/features/otc-desk",
+      "title": "OTC Desk",
+      "heading": "Large trades. Zero slippage. Full discretion."
+    },
+    { "label": "Company", "path": "/company", "title": "About mb.io", "heading": "Why MultiBank Group?" },
+    { "label": "Support", "path": "/support", "title": "Help Center", "heading": "Got questions?" },
+    { "label": "Blog", "path": "/blog", "title": "Blog and news", "heading": "Blog and news" }
+  ],
+  "externalNav": [
+    {
+      "label": "$MBG",
+      "href": "https://token.multibankgroup.com/en",
+      "landingHosts": ["token.mb.io", "token.multibankgroup.com"]
+    }
+  ],
+  "authButtons": [
+    { "label": "Sign in", "href": "https://trade.mb.io/login" },
+    { "label": "Sign up", "href": "https://trade.mb.io/register" }
+  ]
+}

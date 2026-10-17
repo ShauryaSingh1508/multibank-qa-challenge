@@ -1,0 +1,14 @@
+{
+  "home": {
+    "heading": "Crypto for everyone",
+    "ctas": ["Download the app", "Open an account"]
+  },
+  "explore": {
+    "heading": "Markets at your fingertips",
+    "promoCards": [
+      "Earn interest on your assets",
+      "Get crypto with your card",
+      "Deposits using card or wire transfer"
+    ]
+  }
+}

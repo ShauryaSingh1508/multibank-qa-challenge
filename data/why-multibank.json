@@ -1,0 +1,31 @@
+{
+  "path": "/company",
+  "title": "About mb.io",
+  "heading": "Why MultiBank Group?",
+  "intro": "For nearly two decades, MultiBank has built a reputation as one of the world’s most trusted financial institutions",
+  "stats": [
+    { "value": "$2 trillion", "label": "Annual turnover" },
+    { "value": "2,000,000+", "label": "Customers worldwide" },
+    { "value": "25+", "label": "Offices globally" }
+  ],
+  "sections": [
+    {
+      "heading": "A tradition of global leadership",
+      "text": "Founded in 2005, MultiBank has grown into one of the largest financial groups worldwide"
+    },
+    { "heading": "Innovation with purpose", "text": "We believe technology should simplify finance." },
+    { "heading": "Integrity built into every decision", "text": "Trust is earned through consistent action." }
+  ],
+  "strength": {
+    "heading": "The strength behind MultiBank Group",
+    "cards": [
+      { "title": "Regulation at our core", "text": "MultiBank operates under strict global oversight" },
+      { "title": "Proven track record", "text": "With years of global experience" },
+      { "title": "Secure & trusted", "text": "Institution-grade infrastructure and strong risk controls" }
+    ]
+  },
+  "community": {
+    "heading": "Community & Media",
+    "subheading": "The latest news and discussions about MultiBank Group."
+  }
+}

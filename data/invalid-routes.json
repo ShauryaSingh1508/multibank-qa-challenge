@@ -1,0 +1,5 @@
+[
+  { "name": "unknown top-level page", "path": "/this-page-does-not-exist-qa" },
+  { "name": "unknown nested page", "path": "/features/does-not-exist/deeper" },
+  { "name": "unknown coin symbol", "path": "/explore/NOTACOIN123" }
+]

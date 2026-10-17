@@ -1,0 +1,12 @@
+{
+  "desktop": [
+    { "name": "Full HD", "width": 1920, "height": 1080 },
+    { "name": "MacBook", "width": 1440, "height": 900 },
+    { "name": "HD laptop", "width": 1366, "height": 768 },
+    { "name": "Small laptop", "width": 1280, "height": 800 }
+  ],
+  "mobile": [
+    { "name": "iPhone SE", "width": 375, "height": 667 },
+    { "name": "Pixel 7", "width": 412, "height": 915 }
+  ]
+}
