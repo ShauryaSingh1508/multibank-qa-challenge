@@ -73,6 +73,7 @@ jobs:
           name: report-${{ matrix.project }}
           path: |
             reports/html
+            reports/monocart
             reports/results.json
             reports/junit.xml
             test-results
@@ -98,5 +99,6 @@ jobs:
           name: report-visual
           path: |
             reports/html
+            reports/monocart
             test-results
           retention-days: 14

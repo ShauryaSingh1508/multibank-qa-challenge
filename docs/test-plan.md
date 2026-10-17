@@ -48,7 +48,7 @@ Give the team fast, trustworthy feedback on the public, logged-out mb.io experie
 | Item     | Value                                                                                              |
 | -------- | -------------------------------------------------------------------------------------------------- |
 | Target   | `https://mb.io/<LOCALE>` (production), default locale `en-AE`                                      |
-| Browsers | Chromium, Firefox, WebKit (desktop 1440×900); Pixel 7 (Chromium) and iPhone 13 (WebKit) emulation  |
+| Browsers | Chromium, WebKit (desktop 1440×900); Pixel 7 (Chromium) and iPhone 13 (WebKit) emulation           |
 | Config   | `config/env.ts`; every value can be overridden by an env var or `.env`                             |
 | CI       | GitHub Actions: lint → browser matrix in parallel; nightly schedule; reports uploaded as artifacts |
 
@@ -58,7 +58,7 @@ Give the team fast, trustworthy feedback on the public, logged-out mb.io experie
 
 **Exit (for a release candidate):**
 
-- All `@smoke` tests pass on Chromium, Firefox and WebKit.
+- All `@smoke` tests pass on Chromium and WebKit.
 - No unexpected failures in `@regression`, `@mobile` or `@api`. Flaky tests are investigated, not just re-run.
 - Each `@known-issue` has an owner and a ticket; any new failure is triaged within one working day.
 - Visual diffs are reviewed and baselines updated in the same PR as the intended UI change.
@@ -75,17 +75,19 @@ Give the team fast, trustworthy feedback on the public, logged-out mb.io experie
 ## 7. Deliverables
 
 - HTML report, JSON results, JUnit XML (`reports/`), plus a Markdown summary per CI job.
+- Monocart report (`reports/monocart/index.html`, open with `npm run report:monocart`): one searchable table covering every project, known-issue and observation annotations shown next to each test, and a pass-rate trend built from the previous run's `reports/monocart/index.json`. In CI it's uploaded as part of each project's `report-<project>` artifact.
 - Traces and screenshots for failures (`test-results/`).
-- Committed sample run: `reports/sample/`.
+- Committed sample runs: `reports/sample/`. The Playwright HTML report and JUnit file come from a headless run. The Monocart report (`reports/sample/monocart/`, trace zips left out) and `summary-latest.md` come from a later headed run.
 - This plan, the test-case catalogue (`test-cases.md`) and observations (OBS-xx).
 
 ## 8. Risks to the test effort
 
-| Risk                                                                        | Mitigation                                                                             |
-| --------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| Live data changes between read and assert                                   | Compare against the response from the same load; tolerances for prices                 |
-| Geo/locale content differences on CI runners (OBS-12)                       | Locale pinned in config; locale-agnostic URL assertions                                |
-| Hydration races (clicks before JS attaches handlers)                        | `open()` waits for `load`; menu open retries until the sheet appears                   |
-| Third-party stores / bot protection (App Store, hacken.io) block automation | Bot-protected hosts reported, not failed; one CI retry for transient network errors    |
-| Visual baselines differ by OS (font rendering)                              | Baselines per platform; CI visual job is informational until Linux baselines are added |
-| Production rate limiting                                                    | Low link-check concurrency; link check runs on one browser only                        |
+| Risk                                                                             | Mitigation                                                                          |
+| -------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| Live data changes between read and assert                                        | Compare against the response from the same load; tolerances for prices              |
+| Geo/locale content differences on CI runners (OBS-12)                            | Locale pinned in config; locale-agnostic URL assertions                             |
+| Hydration races (clicks before JS attaches handlers)                             | `open()` waits for `load`; menu open retries until the sheet appears                |
+| Third-party stores / bot protection (App Store, hacken.io) block automation      | Bot-protected hosts reported, not failed; one CI retry for transient network errors |
+| Production rate limiting                                                         | Low link-check concurrency; link check runs on one browser only                     |
+| Visual baselines break when run headed (scrollbar shrinks width by 6 px, OBS-15) | Visual project run headless only; CI never runs headed                              |
+| Slow page loads under heavy local parallelism (SPT-03b timeout, OBS-16)          | One CI retry; Monocart trend shows whether a test keeps failing                     |

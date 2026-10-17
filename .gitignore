@@ -4,6 +4,7 @@ playwright-report/
 reports/html/
 reports/results.json
 reports/junit.xml
+reports/monocart/
 blob-report/
 .env
 .DS_Store

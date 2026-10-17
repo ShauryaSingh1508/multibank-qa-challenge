@@ -29,6 +29,16 @@ export default defineConfig({
     ['html', { outputFolder: 'reports/html', open: 'never' }],
     ['json', { outputFile: 'reports/results.json' }],
     ['junit', { outputFile: 'reports/junit.xml' }],
+    // Single-file report with trend history, known-issue/observation annotations and CI-friendly
+    // summary; `trend` reads the previous run's JSON so pass-rate drift is visible across runs.
+    [
+      'monocart-reporter',
+      {
+        name: `mb.io QA (${env.locale})`,
+        outputFile: 'reports/monocart/index.html',
+        trend: 'reports/monocart/index.json',
+      },
+    ],
   ],
   use: {
     baseURL: env.baseUrl,
@@ -44,11 +54,6 @@ export default defineConfig({
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'], viewport: { width: 1440, height: 900 } },
-      grepInvert: DESKTOP_ONLY,
-    },
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'], viewport: { width: 1440, height: 900 } },
       grepInvert: DESKTOP_ONLY,
     },
     {

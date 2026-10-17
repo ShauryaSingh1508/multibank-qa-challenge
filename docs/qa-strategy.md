@@ -12,7 +12,7 @@ I don't start by writing automation. With two weeks left, any test code written 
 
 **Days 1–2: understand and map risk**
 
-- Talk to engineering, product, compliance and support (if there is a beta). I ask each the same three questions: what worries you, what has broken before, and what has never been tested?
+- Talk to engineering, product, compliance and support (if needed to understand the flows). I ask each the same three questions: what worries you, what has broken before, and is there anything not tested yet?
 - Map every flow that moves or shows money: sign-up and KYC, deposit (card and bank), buy/sell (market and limit), the order book and portfolio balance, withdrawal, and transaction history. Then add the flows that protect it: login, 2FA, session timeout, device change, password reset.
 - Read the architecture at a whiteboard level: which numbers are calculated on the client and which on the server, where prices come from, how orders reach the matching engine or liquidity provider, and what happens when a call times out halfway.
 - Check what already exists: unit tests, staging data, feature flags, crash reporting, logs, monitoring, and the ability to roll back or turn a feature off.
@@ -47,7 +47,7 @@ Risk-based, layered, and focused on correctness of money over cosmetic polish.
 | Compliance & content       | KYC gating, geo-restrictions, risk disclaimers, terms acceptance, correct regulatory wording per region.                                                                                                                                           |
 | Observability              | Crashes and errors are actually reported (Crashlytics/Sentry), and support can trace a user's transaction.                                                                                                                                         |
 
-**Automation strategy** (built from week 1, owned jointly with developers)
+**Automation strategy** (built from week 1, owned jointly with other QA team)
 
 - API tests first: most money logic lives server-side, and API tests are fast, stable and cover the ledger rules. This is where I get the most protection per hour.
 - Contract tests between app and backend so a renamed field can't silently produce a `NaN` balance.
@@ -56,7 +56,7 @@ Risk-based, layered, and focused on correctness of money over cosmetic polish.
 
 ## 3. What does QA look like inside a sprint?
 
-QA is a continuous activity across the sprint, not a phase at the end of it.
+QA acts as a continuous activity across the sprint, it's not a phase at the end of it.
 
 | Stage                             | What QA does                                                                                                                                                                                                                       |
 | --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -80,6 +80,23 @@ QA is a continuous activity across the sprint, not a phase at the end of it.
 - **Risk-traceable:** every test maps to a risk or requirement, and every escaped bug adds a test. Tests that have never caught anything and cost time get retired.
 - **Readable results:** one report for both platforms, traces/videos on failure, and failures routed to the owning team.
 - **Paired with manual exploratory testing** each release on what changed. Automation confirms what we know; exploration finds what we don't.
+
+**Non-functional tests are part of the suite too.** A trading app can be functionally correct and still fail on launch day because it's slow, falls over under traffic, or behaves badly on a weak connection. I'd cover three areas:
+
+- **Load and high traffic with k6.** I'd write k6 scripts for the endpoints that matter most on a busy day: login, price feed (including the WebSocket stream), order placement, portfolio balance and withdrawal requests. I'd run them against staging, never production, using these test types:
+  - Load: expected peak traffic, to check we meet normal targets.
+  - Stress: around 3× peak, to find where things start to break.
+  - Spike: a sudden jump in traffic, like a launch push notification or a big market move.
+  - Soak: a few hours of steady traffic, to catch memory leaks and connection-pool exhaustion.
+
+  Each script has k6 `thresholds` (for example p95 order placement under 500 ms and error rate under 0.1%), so a slow build fails the run instead of someone having to read a graph. A short load test runs nightly in CI. The full stress, spike and soak runs happen before every release and after any big backend change. Under load I also check that money logic still holds: no duplicate orders, and balances still reconcile.
+
+- **Network failure testing.** I'd test on bad networks on purpose, not just office Wi-Fi:
+  - Throttled 3G, high latency and packet loss, using network link conditioners on devices and a proxy like Charles or Proxyman.
+  - Losing the connection completely mid-order, and switching between Wi-Fi and mobile data.
+  - Backend dependencies timing out or returning 5xx, simulated with a tool like Toxiproxy in staging.
+
+  The pass criteria are always the same: the user sees a clear final state, retries don't create duplicate orders or withdrawals, and stale prices are labelled instead of shown as live.
 
 The Task 1 framework in this repo is a small-scale example of these principles: page objects, data-driven tests, API-backed assertions, fault injection, tags for tiers, and a CI matrix.
 

@@ -1,143 +1,187 @@
-# MultiBank (mb.io) – QA Automation Challenge
+# MultiBank (mb.io) QA Automation Challenge
 
-A Playwright + TypeScript framework that tests the public mb.io web experience (Task 1), plus written QA strategy documents for a mobile trading app launch (Task 2).
+My submission has two parts:
+
+- **[Task 1: Test automation](#task-1-test-automation).** A Playwright + TypeScript suite for the public mb.io site. Everything from Setup onwards is about this.
+- **[Task 2: QA strategy](#task-2-qa-strategy).** How I'd handle QA as the first QA engineer, two weeks before a mobile trading app launches.
+
+## Task 2: QA strategy
+
+This is a written task, so there's no code. The scenario: it's my first day as the only QA at a fintech startup, the iOS and Android trading app goes live in two weeks, there are no tests, and real money is involved.
+
+My answers are in **[docs/qa-strategy.md](docs/qa-strategy.md)**, one section per question:
+
+1. **Where do you start?** Not with automation. I spend the first days mapping where money can go wrong, put it in a risk matrix, and bring a clear "must verify / accepted gaps" list to the go/no-go.
+2. **How would you approach testing this app?** Risk-based, with money correctness first: ledger, order lifecycle, resilience, security, devices and compliance. API tests come before a small set of mobile E2E tests.
+3. **What does QA look like inside a sprint?** QA is involved at every stage, from refining the ticket through to watching production after release, not just a testing phase at the end.
+4. **What does your ideal regression suite look like?** A pyramid in tiers (smoke, core, nightly), deterministic and traceable to risks. It also covers non-functional testing: k6 load, stress, spike and soak tests, app performance budgets, and network failure testing.
+5. **What would keep you up at night?** Duplicate orders or withdrawals when something fails, stale prices, account takeover, shipping with no safety net, launch-day load, and having no way to spot or undo a problem. If I could get only one thing before launch, it would be a reconciliation check on balances.
+
+Two documents go with it:
+
+- **[Risk matrix](docs/risk-matrix.md):** launch risks scored by likelihood × impact, plus the real risks I found on mb.io in Task 1.
+- **[Release checklist](docs/release-checklist.md):** the go/no-go list, with blockers marked.
+
+## Task 1: Test automation
 
 ```bash
 npm ci && npm test
 ```
 
-That single command installs dependencies and browsers, then runs the whole suite: Chromium, Firefox, WebKit, mobile Chrome, mobile Safari, API and visual projects. Requires Node 20+.
+Needs Node 20+. `npm test` installs the browsers and runs all 6 projects.
 
-| Quick links                                              |                                                       |
-| -------------------------------------------------------- | ----------------------------------------------------- |
-| [Test cases & findings](docs/test-cases.md)              | Every test, traceability to the brief, OBS-xx defects |
-| [Test plan](docs/test-plan.md)                           | Scope, approach, entry/exit criteria, cadence         |
-| [Task 2 – QA strategy](docs/qa-strategy.md)              | Answers to the five questions                         |
-| [Risk matrix](docs/risk-matrix.md)                       | Mobile launch risks + risks found on mb.io            |
-| [Release readiness checklist](docs/release-checklist.md) | Go/no-go checklist with blockers                      |
-| [Sample execution report](reports/sample/)               | HTML report, JUnit, summary, evidence screenshots     |
+## Setup
 
----
+1. **Node.** 20 or newer (I used 22). Check with `node -v`.
 
-## Assumptions
+2. **Clone and install.**
 
-1. **Target URL.** `https://trade.multibank.io/` now redirects to `https://trade.mb.io/login`, which is a login wall. Every public feature the brief names (navigation, spot market, banners, app links, Why MultiBank) lives on the marketing site **`https://mb.io/<locale>`**, so that is the system under test. The redirect itself is noted as OBS-01.
-2. **"About Us > Why MultiBank"** is the page behind the **Company** nav item (`/company`, H1 "Why MultiBank Group?").
-3. **"Spot trading section"** is the **Spot market** block on **Explore**, with the Hot / Gainers / Losers tabs as the categories.
-4. **Locale.** Content is geo-dependent (`/` redirects to `/en-AE` from the UAE). The suite pins `LOCALE=en-AE` and asserts URLs with locale-agnostic patterns.
-5. **No account actions.** Sign in / Sign up are verified by their link targets only; no form is ever submitted.
-6. Expected copy reflects the live site on 2026-10-17 and lives in `data/*.json`, so a content change means a one-line data update.
+   ```bash
+   git clone https://github.com/ShauryaSingh1508/multibank-qa-challenge.git
+   cd multibank-qa-challenge
+   npm ci
+   ```
 
-## Results at a glance
+3. **Browsers.**
 
-Latest local run (macOS, Playwright 1.64.1): **117 passed, 0 failed, 0 flaky** across chromium, webkit, mobile-chrome, mobile-safari, api and visual. Known-defect tests are counted as passing because they fail as expected. Details are in [`reports/sample/`](reports/sample/).
+   ```bash
+   npx playwright install chromium webkit
+   ```
 
-Building the suite surfaced **real defects** on production, each pinned by an automated test:
+4. **(Optional) Settings.** By default it tests https://mb.io in `en-AE`, so I usually skip this. To test staging or another locale, `cp .env.example .env` and change `BASE_URL` or `LOCALE`. Expected text in `data/*.json` is English, so another language needs its own copy there.
 
-| ID     | Severity | Finding                                                                                                               |
-| ------ | -------- | --------------------------------------------------------------------------------------------------------------------- |
-| OBS-10 | High     | A single HTTP 500 from the market-data widget replaces the **entire Explore page** with "Oops, something went wrong!" |
-| OBS-02 | High     | Coin detail pages (`/explore/BTC` …) render fine but respond with **HTTP 500**                                        |
-| OBS-09 | Medium   | If market data fails, the price table disappears with no message and the client retries silently forever              |
-| OBS-05 | Medium   | "Download the app" from desktop Safari ends on an **App Store 404**                                                   |
-| OBS-08 | Medium   | Mobile coin page shows the raw i18n key `common:sign-up-login`                                                        |
-| OBS-06 | Question | Gainers / Losers are not sorted by the 24h change they display                                                        |
-| OBS-07 | Low      | 404 page has an empty `<title>`                                                                                       |
+5. **Check it works.**
 
-Full list with handling: [docs/test-cases.md#key-observations](docs/test-cases.md#key-observations).
+   ```bash
+   npm run test:smoke                              # under 10 seconds
+   npm run test:smoke -- --headed                  # watch the browser
+   npm run test:smoke -- --headed --workers=1      # one window at a time
+   ```
 
-## Running subsets
+   `-- --headed` works on any `npm run test:*` command. When I want one worker locally all the time, I change `workers: env.isCI ? 2 : undefined` to `workers: env.isCI ? 2 : 1` in `playwright.config.ts`.
 
-| Command                                          | What it runs                                       |
-| ------------------------------------------------ | -------------------------------------------------- |
-| `npm test`                                       | Everything (all 7 projects)                        |
-| `npm run test:smoke`                             | `@smoke` on Chromium (< 10 s)                      |
-| `npm run test:cross-browser`                     | Desktop suite on Chromium, Firefox and WebKit      |
-| `npm run test:chromium` / `:firefox` / `:webkit` | One desktop engine                                 |
-| `npm run test:mobile`                            | `@mobile` on Pixel 7 and iPhone 13 emulation       |
-| `npm run test:api`                               | `@api` (no browser)                                |
-| `npm run test:visual`                            | Visual regression (`:update` to refresh baselines) |
-| `npm run report`                                 | Open the last HTML report                          |
-| `npm run report:summary`                         | Print a Markdown summary of the last run           |
-| `npm run lint` / `typecheck` / `format:check`    | Static checks (run in CI before tests)             |
+6. **Results.**
 
-Any Playwright flag works too, e.g. `npx playwright test -g "SPT-02" --headed --project=webkit`.
+   ```bash
+   npm run report            # Playwright HTML report
+   npm run report:monocart   # Monocart report (the one I use)
+   ```
 
-**Configuration** (`config/env.ts`; override via env vars or a `.env` file, see `.env.example`): `BASE_URL`, `LOCALE`, `CORE_API_URL`, `MARKET_DATA_API_URL`, `APP_SMART_LINK`.
+   Monocart puts every project in one searchable table, shows the known-issue notes next to each test and keeps a pass-rate trend. The file is `reports/monocart/index.html` (`npx monocart show-report reports/monocart/index.html` opens it too).
 
-## Project structure
+Other docs:
+
+- [Test cases and findings](docs/test-cases.md)
+- [Test plan](docs/test-plan.md)
+- [Sample runs](reports/sample/)
+
+## Assumptions I made
+
+1. `trade.multibank.io` now redirects to a login page (`trade.mb.io/login`). Everything the brief mentions is on `mb.io/<locale>`, so I tested that (OBS-01).
+2. "About Us > Why MultiBank" = the Company page (`/company`).
+3. "Spot trading section" = the Spot market block on Explore, with Hot / Gainers / Losers as categories.
+4. The site picks a locale by location. I pinned `en-AE` and kept URL checks locale-agnostic.
+5. No accounts, no form submits. Sign in / Sign up are checked by where they link.
+6. Expected text is from the live site on 17 Oct 2026, kept in `data/*.json`.
+
+## Results
+
+Two full local runs on 17 Oct 2026 (macOS, Playwright 1.64.1). Known-defect tests count as passed since they're expected to fail.
+
+- **Headless:** 117 passed, 0 failed, 1 skipped.
+- **Headed** (the Monocart one): 113 passed, 4 failed, 1 skipped. Three visual tests failed because headed mode adds a 6px scrollbar (OBS-15), and SPT-03b timed out once on a slow load (OBS-16). All four passed when re-run headless, so none are site bugs.
+
+Reports are in [`reports/sample/`](reports/sample/).
+
+Real bugs I found on production, each tracked by a test:
+
+| ID     | Severity | What happens                                                          |
+| ------ | -------- | --------------------------------------------------------------------- |
+| OBS-10 | High     | One 500 from the market-data widget takes down the whole Explore page |
+| OBS-02 | High     | Coin pages like `/explore/BTC` look fine but return HTTP 500          |
+| OBS-09 | Medium   | If market data fails, the price table just vanishes with no message   |
+| OBS-05 | Medium   | "Download the app" on desktop Safari lands on an App Store 404        |
+| OBS-08 | Medium   | Mobile coin page shows the raw key `common:sign-up-login` on a button |
+| OBS-06 | Question | Gainers/Losers aren't sorted by their 24h change. Might be on purpose |
+| OBS-07 | Low      | 404 page has an empty `<title>`                                       |
+
+Full list in [docs/test-cases.md](docs/test-cases.md#key-observations).
+
+## Running the tests
+
+| Command                                       | What it does                               |
+| --------------------------------------------- | ------------------------------------------ |
+| `npm test`                                    | Everything                                 |
+| `npm run test:smoke`                          | `@smoke` on Chromium                       |
+| `npm run test:cross-browser`                  | Desktop tests on Chromium and WebKit       |
+| `npm run test:chromium` / `:webkit`           | One browser                                |
+| `npm run test:mobile`                         | Pixel 7 and iPhone 13 emulation            |
+| `npm run test:api`                            | API tests, no browser                      |
+| `npm run test:visual`                         | Screenshots (`:update` to reset baselines) |
+| `npm run report` / `report:monocart`          | Open a report                              |
+| `npm run report:summary`                      | Markdown summary of the last run           |
+| `npm run lint` / `typecheck` / `format:check` | Static checks                              |
+
+Any Playwright flag works, e.g. `npx playwright test -g "SPT-02" --headed` or `npx playwright test --ui`.
+
+## Project layout
 
 ```
-├── config/env.ts            Environment values + locale-aware path helpers
-├── playwright.config.ts     Projects (browsers/devices), reporters, timeouts, tag routing
-├── pages/                   Page Object Model
-│   ├── BasePage.ts          open(), readiness, overflow + broken-image helpers, header/footer
-│   ├── components/          NavBar (desktop nav + mobile sheet), Footer
-│   ├── HomePage.ts  SpotTradingPage.ts  CoinDetailPage.ts  WhyMultiBankPage.ts  NotFoundPage.ts
-├── api/                     MarketApi client + response types (API-layer "page object")
-├── fixtures/
-│   ├── test.ts              UI fixtures: page objects injected, 3rd-party blocking, consent handler, page-error capture
-│   └── api.ts               Browserless fixtures for @api specs
-├── data/                    Test data: nav items, viewports, categories, page copy, routes, app links
-├── utils/                   link-checker, redirect follower, network capture, formatters, knownIssue()
-├── tests/
-│   ├── navigation/          nav.spec.ts
-│   ├── trading/             spot-trading.spec.ts
-│   ├── content/             banners, app-links, why-multibank
-│   ├── negative/            invalid-route, broken-links, mobile-viewport, timeout
-│   ├── api/                 market-data.spec.ts       (bonus)
-│   └── visual/              visual.spec.ts + baselines (bonus)
-├── scripts/                 summarize-results.mjs (JSON report → Markdown)
-├── docs/                    test plan, test cases, risk matrix, release checklist, QA strategy
-├── reports/sample/          Committed sample run
-└── .github/workflows/ci.yml Lint → browser matrix → artifacts; nightly schedule
+├── config/env.ts            Env values, locale helpers
+├── playwright.config.ts     Projects, reporters, tag routing
+├── pages/                   Page objects (+ components/ for nav and footer)
+├── api/                     MarketApi client
+├── fixtures/                test.ts (UI), api.ts (browserless)
+├── data/                    Test data as JSON
+├── utils/                   Link checker, redirects, network, knownIssue()
+├── tests/                   navigation, trading, content, negative, api, visual
+├── scripts/                 summarize-results.mjs
+├── docs/                    Test plan, cases, risks, checklist, strategy
+├── reports/sample/          Committed sample runs
+└── .github/workflows/ci.yml CI: lint, browser matrix, nightly
 ```
 
-## Framework design decisions
+## How the framework is built, and why
 
-**Playwright + TypeScript.** One runner covers Chromium, Firefox and WebKit, device emulation, API requests, network interception, screenshots and traces. That means a single tool for UI, API, fault injection and visual checks. TypeScript catches page-object misuse at compile time.
+**Playwright + TypeScript.** One tool for browsers, mobile emulation, API calls, mocking and screenshots.
 
-**Page Object Model, kept thin.** Page objects expose locators and intent-level actions (`selectCategory`, `openMobileMenu`, `readRows`). **Assertions stay in specs**, so a failure points at the requirement, not at a helper. The shared header and footer are components composed into `BasePage`, not inherited copies. The API client (`api/MarketApi.ts`) is the same idea for the service layer.
+**Thin page objects.** Locators and actions only. Assertions stay in the specs so a failure points at the requirement.
 
-**Fixtures for wiring.** Specs ask for `homePage` or `spotTradingPage` and get a ready instance. Auto-fixtures handle cross-cutting concerns once: blocking chat/analytics scripts (noise and overlays), dismissing cookie consent with a locator handler (no racy one-off click), and attaching uncaught page errors to the report.
+**Fixtures.** Tests ask for `homePage` etc. and get one ready. Auto-fixtures block chat/analytics, close the cookie banner and attach page errors.
 
-**Locators.** Role- and text-based first (`getByRole('navigation', { name: 'Main' })`, `getByRole('button', { name: 'Gainers' })`), which is also an accessibility signal. Where the app has no accessible hooks, stable structural attributes are used (`td[id$="_price-td"]`, `tr[data-index]`), never the utility-class soup.
+**Locators.** Roles and text first, stable attributes (`tr[data-index]`) when there's nothing else. No CSS utility classes.
 
-**Assertions that survive live data.** Prices and rankings change every second, so specs never hard-code them. Instead:
+**Live data.** Prices change constantly, so I compared the table against the API response from the same page load, check formats (`$1,234.56`, `1.23%`) with soft assertions, and check banner positions relative to the page.
 
-- **Same-load API comparison:** the spec captures the `market/widget` / `prices` responses the page itself fetched, then asserts the table matches them (category membership and order, price within 2%).
-- **Format + direction:** every row is checked for `$1,234.56`, `1.23%`, and an up/down style. Malformed values fail with the exact row named (`Gainers > SAND: sparkline`), using soft assertions so one run reports every bad cell.
-- **Positional checks for "expected region":** banner bounding boxes are asserted relative to the header, page title and spot section.
+**Stability.** No `waitForTimeout` (lint blocks it). Waits are on real conditions. The 1024px WebKit layout was flaky, so I logged it (OBS-13) instead of retrying it green.
 
-**Determinism.** No `waitForTimeout` (lint-enforced). Waits are on conditions: element visible, response received, rows settled (icons and sparklines rendered). `open()` waits for `load` so clicks don't land before hydration. The hamburger open retries until the sheet appears, because a click that lands before React attaches its handler is silently dropped. A breakpoint-boundary width (1024 px) that rendered non-deterministically in WebKit was moved out of the matrix and logged (OBS-13) instead of being retried into green.
+**Known bugs.** `knownIssue()` marks a test as expected to fail. The run stays green, the bug stays in the report, and Playwright tells me when it's fixed. Product questions get a non-failing `observation`.
 
-**Known defects stay visible but don't block.** `knownIssue(testInfo, 'OBS-02', …)` asserts the correct behaviour and marks the test `test.fail()`. The run stays green, the report lists the defect, and when developers fix it Playwright reports an _unexpected pass_, the cue to remove the marker. Product questions (e.g. ranking order) use a non-failing `observation` annotation instead.
+**Negative tests.** Slow feed, aborted request, bad JSON and a 500, checking for crashes or junk like `NaN`. App links are followed hop by hop with different user agents.
 
-**Edge cases that reflect real failures.** Fault injection covers a slow feed, an aborted request, malformed JSON and HTTP 500, and checks for a crash or garbage (`NaN`, `undefined`, `$0.00`) rather than only "page loads". The smart-link checks follow redirects hop by hop with iPhone, Android, desktop Chrome and desktop Safari User-Agents, because the Android hop ends in `intent://`, which no desktop browser can load.
+**Tags.** `@mobile`, `@api` and `@visual` decide which project a test runs in.
 
-**Tags route tests to projects.** `@mobile` runs only on the device projects, `@api` only on the browserless project, and `@visual` only on the Chromium visual project. A new spec only needs the right tag to run in the right place.
+**Easy to extend.** To test a new page, I will create one page-object file for it and add one line in `fixtures/test.ts` so tests can use it. For a lot of changes I don't need to write any code at all. If the site adds a menu item, I add it to `data/nav-items.json`. To test another screen size, I add it to `data/viewports.json`. To check another broken URL, I add it to `data/invalid-routes.json`. The tests read these files and create a test for each entry automatically.
 
-**Scaling the framework.** Adding a page means one page-object file plus a fixture line. Adding coverage for a new nav item, viewport, invalid route or Why MultiBank section is a JSON edit. Pointing at staging or another locale is an env var.
+## Cross-browser results
 
-## Cross-browser evidence
-
-- `reports/sample/html/index.html`: HTML report of the full local run (Chromium, WebKit, mobile Chrome, mobile Safari, API, visual). Open it with `npx playwright show-report reports/sample/html`.
-- `reports/sample/summary-local.md`: per-project totals and every known issue or observation raised.
-- **Firefox:** the Firefox build bundled with Playwright 1.64 fails to start on the author's machine (macOS 27) (`Could not find profile folder`, a local environment issue that happens before any test code runs). Firefox runs in the CI matrix on Ubuntu; see the `e2e (firefox)` job and its `report-firefox` artifact on the Actions tab.
-- CI uploads one HTML report per project as an artifact and writes a Markdown summary to each job page.
+- `reports/sample/html/`: Playwright report from the headless run (`npx playwright show-report reports/sample/html`).
+- `reports/sample/monocart/`: Monocart report from the headed run.
+- `summary-local.md` and `summary-latest.md` in the same folder have the per-project totals.
+- CI uploads both reports per project and writes a summary to the job page.
 
 ## Visual baselines
 
-Baselines live next to the spec (`tests/visual/__screenshots__/visual/`) and were generated on macOS. Font rendering differs between operating systems, so the CI visual job runs in the official Playwright Docker image and is informational (`continue-on-error`) until Linux baselines are committed (`npm run test:visual:update` inside that image). Only static regions are captured: header, footer, Why MultiBank hero and 404. Fonts and fade-in animations are allowed to finish first.
+Baselines are in `tests/visual/__screenshots__/visual/`, taken on macOS. Only static parts are captured: header, footer, Why MultiBank hero, 404.
 
 ## Adding a test
 
-1. Put expected values in `data/<area>.json`.
-2. If the page is new, add `pages/<Name>Page.ts` extending `BasePage` (locators + actions only) and register it in `fixtures/test.ts`.
-3. Write `tests/<area>/<name>.spec.ts` importing `test, expect` from `fixtures/test` (or `fixtures/api` for HTTP-only tests). Give it an ID and tags (`@smoke` / `@regression` / `@mobile` / `@api` / `@visual`).
+1. Expected values go in `data/<area>.json`.
+2. New page? Add `pages/<Name>Page.ts` and register it in `fixtures/test.ts`.
+3. Write `tests/<area>/<name>.spec.ts` with an ID and tags.
 4. Add a row to `docs/test-cases.md`.
-5. Run `npm run lint && npm run typecheck` before pushing.
+5. `npm run lint && npm run typecheck`.
 
-## Ethics and safety
+## A note on safety
 
-The suite only reads public pages and public JSON endpoints. It never logs in, never submits a form, keeps link-check concurrency low, runs the link check on one browser only, and blocks analytics so test traffic doesn't pollute marketing data.
+Public pages and endpoints only. No logins, no forms, low link-check concurrency, and analytics blocked so test traffic stays out of MultiBank's data.
