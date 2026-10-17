@@ -42,8 +42,6 @@ jobs:
         include:
           - project: chromium
             browsers: chromium
-          - project: firefox
-            browsers: firefox
           - project: webkit
             browsers: webkit
           - project: mobile-chrome
